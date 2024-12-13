@@ -22,7 +22,7 @@ import java.util.List;
 public class Controller {
     protected Stage stage;
     protected SocketWrapper socketWrapper;
-
+    //protected String clubName;
 
     public SocketWrapper getSocketWrapper() {
         return socketWrapper;
@@ -50,6 +50,10 @@ public class Controller {
         stage.setScene(scene);
         stage.show();
     }
+
+//    public void setClubName(String username) {
+//        clubName = username;
+//    }
 
     //public abstract void updatePlayerList(List<Player> players);
 }

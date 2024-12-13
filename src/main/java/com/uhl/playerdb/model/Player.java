@@ -1,6 +1,7 @@
 package com.uhl.playerdb.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Player implements Serializable {
     private String name;
@@ -106,4 +107,24 @@ public class Player implements Serializable {
     public void setWeeklySalary(int weeklySalary) {
         this.weeklySalary = weeklySalary;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        return jerseyNumber == player.jerseyNumber &&
+                Objects.equals(name, player.name) &&
+                Objects.equals(country, player.country) &&
+                Objects.equals(club, player.club);
+    }
+
+    // Override hashCode() to be consistent with equals()
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, country, club, jerseyNumber);
+    }
+
 }

@@ -12,7 +12,8 @@
             <Button layoutX="61.0" layoutY="72.0" mnemonicParsing="false" text="Search Player" />
             <Button layoutX="60.0" layoutY="117.0" mnemonicParsing="false" text="Search Club" />
             <Button layoutX="61.0" layoutY="168.0" mnemonicParsing="false" text="Add Player" />
-            <Button layoutX="61.0" layoutY="229.0" mnemonicParsing="false" text="Exit" />
+            <Button layoutX="81.0" layoutY="307.0" mnemonicParsing="false" text="Exit" />
+            <Button layoutX="75.0" layoutY="240.0" mnemonicParsing="false" onAction="#onClickBuyPlayer" text="Buy Player" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>

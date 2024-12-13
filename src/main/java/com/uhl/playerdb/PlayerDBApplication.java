@@ -2,6 +2,7 @@ package com.uhl.playerdb;
 
 import com.uhl.playerdb.Networking.ReadThread;
 import com.uhl.playerdb.Networking.SocketWrapper;
+import com.uhl.playerdb.controller.BuyPlayerController;
 import com.uhl.playerdb.controller.Controller;
 import com.uhl.playerdb.controller.MainMenuController;
 import com.uhl.playerdb.controller.WelcomeController;
@@ -61,6 +62,7 @@ public class PlayerDBApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource(name + ".fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 480);
         controller = fxmlLoader.getController();
+        this.controller = controller;
         controller.setStage(stage);
         stage.setTitle("Main Menu");
         stage.setScene(scene);
@@ -83,10 +85,25 @@ public class PlayerDBApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("mainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 480);
         MainMenuController mainMenuController = fxmlLoader.getController();
+        controller = mainMenuController;
         mainMenuController.setStage(stage);
         mainMenuController.setSocketWrapper(socketWrapper);
         mainMenuController.updatePlayerList(playerList);
         stage.setTitle(username);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void showBuyPlayer(List<Player> playerList) throws IOException {
+        System.out.println("switching scene to buy menu");
+        //switch scene to buyPlayer
+        FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("buyPlayer.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        BuyPlayerController controller = fxmlLoader.getController();
+        this.controller = controller;
+        controller.updatePlayerList(playerList);
+        controller.setStage(stage);
+        stage.setTitle("Buy player");
         stage.setScene(scene);
         stage.show();
     }

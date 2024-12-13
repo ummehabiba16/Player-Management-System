@@ -1,5 +1,7 @@
 package com.uhl.playerdb.controller;
 
+import com.uhl.playerdb.DTO.PlayerTransferDTO;
+import com.uhl.playerdb.DTO.TransferListDTO;
 import com.uhl.playerdb.PlayerDBApplication;
 import com.uhl.playerdb.model.*;
 import javafx.application.Platform;
@@ -14,12 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainMenuController extends Controller {
 
@@ -47,11 +46,17 @@ public class MainMenuController extends Controller {
                     Label nameLabel = new Label(player.getName());
                     Label countryLabel = new Label(player.getCountry());
                     Button transferButton = new Button("Transfer");
-
                     // Handle transfer button action
                     transferButton.setOnAction(event -> {
                         System.out.println("Transfer button clicked for player: " + player.getName());
                         // Add transfer logic here
+                        try{
+                            PlayerTransferDTO transferDTO = new PlayerTransferDTO();
+                            transferDTO.setPlayer(player);
+                            socketWrapper.write(transferDTO);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
                     });
 
                     // Layout the components (e.g., in an HBox or VBox)
@@ -111,5 +116,15 @@ public class MainMenuController extends Controller {
     }
     public void onClickExit(ActionEvent actionEvent) {
 
+    }
+
+    public void onClickBuyPlayer(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+
+        TransferListDTO transferListDTO = new TransferListDTO();
+        try {
+            socketWrapper.write(transferListDTO);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

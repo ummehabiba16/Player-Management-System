@@ -6,6 +6,16 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class SocketWrapper {
+    private String clientUsername;
+
+    public void setClientUsername(String clientUsername) {
+        this.clientUsername = clientUsername;
+    }
+
+    public String getClientUsername() {
+        return clientUsername;
+    }
+
     private Socket socket;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
@@ -20,6 +30,7 @@ public class SocketWrapper {
         this.socket = socket;
         oos = new ObjectOutputStream(socket.getOutputStream());
         ois = new ObjectInputStream(socket.getInputStream());
+        clientUsername = new String("Anonymous");
     }
 
     public Object read() throws IOException, ClassNotFoundException {
