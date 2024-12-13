@@ -15,4 +15,6 @@ module com.uhl.playerdb {
     exports com.uhl.playerdb;
     exports com.uhl.playerdb.controller;
     opens com.uhl.playerdb.controller to javafx.fxml;
+
+    exports com.uhl.playerdb.Networking;
 }

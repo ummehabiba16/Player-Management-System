@@ -3,7 +3,7 @@ package com.uhl.playerdb.model;
 import com.uhl.playerdb.service.FileOutputService;
 import com.uhl.playerdb.service.PlayerListService;
 
-public class Exit extends MainMenu{
+public class Exit extends Menu{
     private MenuContext menuContext;
     private PlayerListService playerListService;
 

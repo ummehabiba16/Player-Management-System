@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SearchPlayers extends MainMenu{
+public class SearchPlayers extends Menu{
 
     private MenuContext menuContext;
     private Map<Integer, Runnable> functions = new HashMap<>();
@@ -33,27 +33,8 @@ public class SearchPlayers extends MainMenu{
         functions.put(3, () -> searchByPosition());
         functions.put(4, () -> searchBySalaryrange());
         functions.put(5, () -> findCountrywisePlayerCount());
-        functions.put(6, () -> menuContext.setMenu(new MainMenu(menuContext)));
+        functions.put(6, () -> menuContext.setMenu(new Menu(menuContext)));
 
-    }
-
-    @Override
-    public void display() {
-        int i = 1;
-        for(String option : options) {
-            System.out.println("\n\t("+i + ") " + option);
-            i++;
-        }
-    }
-
-    @Override
-    public void call(int n) {
-        //System.out.println("call of "+ getClass().getSimpleName()+" "+n );
-        if(n < 1 || n > options.size()){
-            System.out.println("Invalid option number");
-            return;
-        }
-        functions.get(n).run();
     }
 
     private void findCountrywisePlayerCount() {

@@ -4,7 +4,7 @@ import com.uhl.playerdb.service.ClubService;
 import com.uhl.playerdb.service.ConsoleInputService;
 import com.uhl.playerdb.service.PlayerListService;
 
-public class AddPlayer extends MainMenu{
+public class AddPlayer extends Menu{
     private MenuContext menuContext;
     private PlayerListService playerListService;
     private ClubService clubService;

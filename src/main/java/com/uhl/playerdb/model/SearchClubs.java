@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SearchClubs extends MainMenu{
+public class SearchClubs extends Menu{
     private MenuContext menuContext;
     private ClubService clubService;
     private Map<Integer, Runnable> functions= new HashMap<>();
@@ -31,36 +31,9 @@ public class SearchClubs extends MainMenu{
         functions.put(3, () -> maxHeight());
         functions.put(4, () -> totalSalary());
         functions.put(5, () -> findClubwisePosCntAndCntrywiseCnt());
-        functions.put(6, () -> menuContext.setMenu(new MainMenu(menuContext)));
+        functions.put(6, () -> menuContext.setMenu(new Menu(menuContext)));
     }
 
-
-
-    @Override
-    public void display() {
-        int i = 1;
-        for(String option : options) {
-            System.out.println("\n\t("+i + ") " + option);
-            i++;
-        }
-    }
-
-    @Override
-    public void call(int n) {
-        //System.out.println("call of "+ getClass().getSimpleName()+" "+n );
-        if(n < 1 || n > options.size()){
-            System.out.println("Invalid option number");
-            return;
-        }
-        if(n != options.size()){
-            Club c = findClub();
-            if(c == null){
-                System.out.println("No such club with this name");
-                return;
-            }
-        }
-        functions.get(n).run();
-    }
 
     private Club findClub(){
         System.out.println("Enter Club name: ");

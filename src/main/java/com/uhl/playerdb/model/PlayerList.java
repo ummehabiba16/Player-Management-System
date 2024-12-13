@@ -1,9 +1,10 @@
 package com.uhl.playerdb.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerList {
+public class PlayerList{
     private List<Player> players;
     public PlayerList(){
         players = new ArrayList<Player>();

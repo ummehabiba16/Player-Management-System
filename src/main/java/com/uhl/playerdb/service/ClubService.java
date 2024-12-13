@@ -48,6 +48,17 @@ public class ClubService {
         return null;
     }
 
+    public List<Player> getPlayersByClub(String clubName){
+        Club club = getClubByName(clubName);
+        if(club == null){
+            System.out.println("Club not found");
+            return null;
+        }
+        else{
+            return club.getPlayerList().getPlayers();
+        }
+    }
+
     public PlayerList maxSalary(Club c) {
         PlayerList playerList = new PlayerList();
         int maxSalary = 0;

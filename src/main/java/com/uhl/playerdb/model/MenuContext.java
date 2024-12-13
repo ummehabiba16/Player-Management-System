@@ -14,7 +14,7 @@ public class MenuContext {
         playerListService = new PlayerListService();
         playerListService.setPlayerList(PlayerRepository.getPlayersFromFile());
         clubService = new ClubService(playerListService.getPlayerList());
-        this.currentMenu = new MainMenu(this);
+        this.currentMenu = new Menu(this);
     }
     public void setMenu(Menu currentMenu){
         //System.out.println("Switching menu from " + this.currentMenu.getClass().getSimpleName() + " to " + currentMenu.getClass().getSimpleName());
@@ -23,14 +23,6 @@ public class MenuContext {
 
     public Menu getCurrentMenu() {
         return currentMenu;
-    }
-
-    public void display(){
-        currentMenu.display();
-    }
-
-    public void call(int choice){
-        currentMenu.call(choice);
     }
 
     public PlayerListService getPlayerListService() {
