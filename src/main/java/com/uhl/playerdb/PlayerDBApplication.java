@@ -102,6 +102,7 @@ public class PlayerDBApplication extends Application {
         BuyPlayerController controller = fxmlLoader.getController();
         this.controller = controller;
         controller.updatePlayerList(playerList);
+        controller.setSocketWrapper(socketWrapper);
         controller.setStage(stage);
         stage.setTitle("Buy player");
         stage.setScene(scene);

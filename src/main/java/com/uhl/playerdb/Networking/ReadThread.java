@@ -140,7 +140,9 @@ public class ReadThread implements Runnable {
                         if(controller instanceof BuyPlayerController){
                             System.out.println("Instance of BuyPlayerController, updating playerList");
                             BuyPlayerController buyPlayerController = (BuyPlayerController) controller;
-                            buyPlayerController.updatePlayerList(updateTransferListDTO.getTransferList());
+                            Platform.runLater(() -> {
+                                buyPlayerController.updatePlayerList(updateTransferListDTO.getTransferList());
+                            });
                         }
 //                        Platform.runLater(new Runnable() {
 //                            main.

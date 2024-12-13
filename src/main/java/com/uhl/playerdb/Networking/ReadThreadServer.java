@@ -62,6 +62,9 @@ public class ReadThreadServer implements Runnable {
                         playerTransferDTO.setStatus(true); // ? pending :: remove status
                         UpdateTransferListDTO updateTransferListDTO = new UpdateTransferListDTO();
                         for(SocketWrapper client : clientConnections){
+                            if(client.getClientUsername().equals("Anonymous")){
+                                continue;
+                            }
                             List<Player> pl = new ArrayList<>();
                             System.out.println("clientUsername "+ client.getClientUsername());
                             for(Player p: transferList){
@@ -92,6 +95,34 @@ public class ReadThreadServer implements Runnable {
                         transferListDTO.setPlayerList(pl);
                         transferListDTO.setStatus(true);
                         socketWrapper.write(transferListDTO);
+                    }
+                    else if(o instanceof BuyPlayerDTO){
+                        System.out.println("Server received a request buyPlayerDTO");
+                        BuyPlayerDTO buyPlayerDTO = (BuyPlayerDTO) o;
+                        Player p = buyPlayerDTO.getPlayer();
+                        System.out.println("player name to be removed "+ p.getName() +" bought by "+ buyPlayerDTO.getBuyerClubName());
+                        System.out.println("before " + transferList.size());
+                        transferList.remove(p);
+                        System.out.println("after " + transferList.size());
+                        p.setClub(buyPlayerDTO.getBuyerClubName());// Pending :: check, update PlayerList
+                        //buyPlayerDTO.setStatus(true); // ? pending :: remove status
+                        UpdateTransferListDTO updateTransferListDTO = new UpdateTransferListDTO();
+                        for(SocketWrapper client : clientConnections){
+                            if(client.getClientUsername().equals("Anonymous")){
+                                continue;
+                            }
+                            List<Player> pl = new ArrayList<>();
+                            //System.out.println("clientUsername "+ client.getClientUsername());
+                            for(Player player: transferList){
+                                //System.out.println("player club "+player.getClub()+" "+ player.getName());
+                                if(player.getClub().equals(client.getClientUsername())){
+                                    continue;
+                                }
+                                pl.add(player);
+                            }
+                            updateTransferListDTO.setTransferList(pl);
+                            client.write(updateTransferListDTO);
+                        }
                     }
                 }
             }

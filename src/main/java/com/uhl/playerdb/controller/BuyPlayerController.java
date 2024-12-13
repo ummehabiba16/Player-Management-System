@@ -1,5 +1,6 @@
 package com.uhl.playerdb.controller;
 
+import com.uhl.playerdb.DTO.BuyPlayerDTO;
 import com.uhl.playerdb.model.Player;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -45,7 +46,15 @@ public class BuyPlayerController extends Controller {
                     // Handle transfer button action
                     transferButton.setOnAction(event -> {
                         System.out.println("Buy button clicked for player: " + player.getName());
-                        // Add transfer logic here
+                        try{
+                            BuyPlayerDTO buyPlayerDTO = new BuyPlayerDTO();
+                            buyPlayerDTO.setPlayer(player);
+                            System.out.println("***** " + socketWrapper.getClientUsername());
+                            buyPlayerDTO.setBuyerClubName(socketWrapper.getClientUsername());
+                            socketWrapper.write(buyPlayerDTO);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
                     });
 
                     // Layout the components (e.g., in an HBox or VBox)
