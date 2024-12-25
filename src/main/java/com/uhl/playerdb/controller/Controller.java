@@ -22,6 +22,21 @@ import java.util.List;
 public class Controller {
     protected Stage stage;
     protected SocketWrapper socketWrapper;
+    protected PlayerDBApplication main;
+    protected String clubName;
+
+    public String getClubName() {
+        return clubName;
+    }
+
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
+
+    public void setMain(PlayerDBApplication main) {
+        this.main = main;
+    }
+
     //protected String clubName;
 
     public SocketWrapper getSocketWrapper() {

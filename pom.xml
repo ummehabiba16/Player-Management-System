@@ -17,6 +17,13 @@
         <!-- Set platform based on your OS: 'win', 'mac', or 'linux' -->
         <javafx.platform>mac-aarch64</javafx.platform> <!-- Adjust based on your OS -->
     </properties>
+    <repositories>
+        <repository>
+            <id>gluon-releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+
 
     <dependencies>
         <!-- JavaFX Dependencies with Platform Classifier -->
@@ -106,6 +113,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-glisten</artifactId>
+            <version>6.2.3</version> <!-- Latest available version -->
+        </dependency>
+
         <dependency>
             <groupId>com.github.almasb</groupId>
             <artifactId>fxgl</artifactId>

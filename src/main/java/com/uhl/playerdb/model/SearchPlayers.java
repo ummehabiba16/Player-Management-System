@@ -76,13 +76,13 @@ public class SearchPlayers extends Menu{
         String Country = ConsoleInputService.getInputString();
         System.out.println("Enter club :");
         String club = ConsoleInputService.getInputString();
-        Player p = playerListService.searchByCountryAndClub(Country, club);
-        if(p != null) {
-            p.display();
-        }
-        else{
-            System.out.println("No such player with this country and club");
-        }
+//        Player p = playerListService.searchByCountryAndClub(Country, club);
+//        if(p != null) {
+//            p.display();
+//        }
+//        else{
+//            System.out.println("No such player with this country and club");
+//        }
     }
 
     private void searchByPlayerName() {

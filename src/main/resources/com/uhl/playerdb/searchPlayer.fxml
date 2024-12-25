@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uhl.playerdb.controller.SearchPlayerController">
-   <children>
-      <ListView fx:id="searchPlayerListView" layoutX="237.0" layoutY="44.0" onInputMethodTextChanged="#handleSearch" prefHeight="334.0" prefWidth="353.0" />
-      <Button layoutX="43.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleBack" text="Back" />
-      <ScrollBar layoutX="570.0" layoutY="129.0" orientation="VERTICAL" />
-      <TextField fx:id="searchNameTextField" layoutX="54.0" layoutY="64.0" onInputMethodTextChanged="#handleSearch" promptText="Enter name" />
-   </children>
-</AnchorPane>
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uhl.playerdb.controller.SearchPlayerController">
+   <items>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Button layoutX="40.0" layoutY="57.0" mnemonicParsing="false" onAction="#onClickByPlayerName" text="By Player Name" />
+            <Button layoutX="27.0" layoutY="101.0" mnemonicParsing="false" onAction="#onClickByClubAndCountry" text="By Club and Country" />
+            <Button layoutX="42.0" layoutY="199.0" mnemonicParsing="false" onAction="#onClickByPosition" text="By Position" />
+            <Button layoutX="35.0" layoutY="283.0" mnemonicParsing="false" onAction="#onClickBySalaryRange" text="By Salary Range" />
+            <Button layoutX="9.0" layoutY="239.0" mnemonicParsing="false" onAction="#onClickCountrywiseCount" text="Country-wise player Count" />
+            <Button layoutX="31.0" layoutY="151.0" mnemonicParsing="false" onAction="#onClickBack" text="Back to main menu" />
+         </children></AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <TextField fx:id="input1" layoutX="94.0" layoutY="42.0" promptText="Enter name" />
+            <Label fx:id="label1" layoutX="40.0" layoutY="47.0" text="Name" />
+            <ListView fx:id="playerListView" layoutX="1.0" layoutY="137.0" prefHeight="261.0" prefWidth="416.0" />
+            <Label fx:id="label2" layoutX="42.0" layoutY="84.0" text="Country" />
+            <TextField fx:id="input2" layoutX="94.0" layoutY="80.0" promptText="Enter country" />
+            <ComboBox fx:id="comboBox1" layoutX="94.0" layoutY="43.0" prefWidth="150.0" promptText="select one" />
+            <Button fx:id="searchButton" layoutX="313.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleSearch" text="search" />
+            <VBox fx:id="vBox" layoutX="1.0" layoutY="137.0" prefHeight="261.0" prefWidth="416.0" />
+            <TableView fx:id="countryCountTable" stylesheets="@../../../Styles/countrywiseCount.css">
+               <columns>
+                  <TableColumn fx:id="countryColumn" minWidth="200" text="Country" />
+                  <TableColumn fx:id="countColumn" minWidth="100" text="Count" />
+               </columns>
+            </TableView>
+         </children></AnchorPane>
+   </items>
+</SplitPane>

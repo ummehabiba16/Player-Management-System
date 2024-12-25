@@ -69,6 +69,7 @@ public class Server {
         clientConnections.add(socketWrapper);
         new ReadThreadServer(userMap, socketWrapper, clubService, playerListService, transferList, clientConnections);
     }
+
     public static void main(String[] args) {
         new Server();
     }

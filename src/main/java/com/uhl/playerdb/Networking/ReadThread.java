@@ -40,13 +40,50 @@ public class ReadThread implements Runnable {
                             clubDTO.setClubName(loginDTO.getUsername());
                             main.getSocketWrapper().write(clubDTO);
                             System.out.println("clubDTO sent");
-
                         } else {
                             Platform.runLater(() -> {
                                 main.showAlert();
                             });
                         }
 
+                    }
+                    else if(o instanceof GetAllPlayersDTO){
+                        GetAllPlayersDTO getAllPlayersDTO = (GetAllPlayersDTO) o;
+                        System.out.println("Status " +getAllPlayersDTO.isStatus());
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (getAllPlayersDTO.isStatus()) {
+                                    System.out.println("Successfully received players");
+                                    List<Player> players = getAllPlayersDTO.getPlayers(); // Assuming getPlayers() gives you List<PlayerDTO>
+                                    System.out.println(players.size() + " players received : " + players.get(0).getName());
+                                    if(getAllPlayersDTO.getClubName() == null) {
+                                        Platform.runLater(() -> {
+                                            try {
+                                                main.showSearchPlayers(players);
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        });
+                                    }
+                                    else{
+                                        Platform.runLater(() -> {
+                                            try {
+                                                main.showSearchClubs(getAllPlayersDTO.getClubName(), players);
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        });
+                                    }
+//                                    Platform.runLater(() -> {
+//                                        main.getController().updatePlayerList(players); // Call to update player list in UI
+//                                    });
+                                } else {
+                                    System.out.println("Failed to receive players");
+                                    Platform.runLater(() -> main.showAlert());//::pending
+                                }
+                            }
+                        });
                     }
                     else if(o instanceof ClubDTO) {
                         ClubDTO clubDTO = (ClubDTO) o;

@@ -1,0 +1,21 @@
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+}
+
+.table-column {
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #3498db;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #f9f9f9;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #e6f7ff;
+}

@@ -12,12 +12,13 @@ import java.util.Map;
 
 public class ClubService {
     List<Club> clubList;
-
+    List<Player> playerList;
     public List<Club> getClubList() {
         return clubList;
     }
 
     public ClubService(List<Player> players) {
+        this.playerList = players;
         clubList = new ArrayList<>();
         Map<String, Club> clubMap = new HashMap<>();
         for(Player player : players){
@@ -135,5 +136,9 @@ public class ClubService {
             }
         }
         return playerCount;
+    }
+
+    public List<Player> getPlayerList() {
+        return playerList;
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uhl.playerdb.controller.SearchClubController">
+   <children>
+      <Button layoutX="27.0" layoutY="347.0" mnemonicParsing="false" onAction="#onClickBackButton" text="Back" />
+      <TextField fx:id="clubNameInput" layoutX="220.0" layoutY="27.0" promptText="Enter club name" />
+      <Label layoutX="153.0" layoutY="32.0" text="Club name" />
+      <Button layoutX="398.0" layoutY="28.0" mnemonicParsing="false" onAction="#onClickSearch" text="Search" />
+      <ListView fx:id="playerListView" layoutX="152.0" layoutY="115.0" prefHeight="247.0" prefWidth="405.0" />
+      <Button fx:id="maxSalaryButton" layoutX="18.0" layoutY="78.0" mnemonicParsing="false" onAction="#onClickMaxSalary" text="Maximum Salary" />
+      <Button fx:id="maxAgeButton" layoutX="18.0" layoutY="132.0" mnemonicParsing="false" onAction="#onClickMaxAge" text="Maximum Age" />
+      <Button fx:id="maxHeightButton" layoutX="18.0" layoutY="187.0" mnemonicParsing="false" onAction="#onClickMaxHeight" text="Maximum Height" />
+      <Button fx:id="totalSalaryButton" layoutX="15.0" layoutY="255.0" mnemonicParsing="false" onAction="#onClickTotalSalary" prefHeight="26.0" prefWidth="108.0" text="Total Salary" />
+      <Label fx:id="totalSalaryLabel" layoutX="261.0" layoutY="154.0" prefHeight="68.0" prefWidth="186.0" />
+      <Label fx:id="totalSalaryPromptLabel" layoutX="220.0" layoutY="115.0" prefHeight="17.0" prefWidth="272.0" text="Total yearly salary" />
+      <Label fx:id="selectedOptionLabel" layoutX="153.0" layoutY="83.0" prefHeight="17.0" prefWidth="331.0" />
+   </children>
+</AnchorPane>

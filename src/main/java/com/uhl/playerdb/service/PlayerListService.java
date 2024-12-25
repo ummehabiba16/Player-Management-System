@@ -37,13 +37,14 @@ public class PlayerListService {
         return null;
     }
 
-    public Player searchByCountryAndClub(String country, String club) {
+    public PlayerList searchByCountryAndClub(String country, String club) {
+        PlayerList pl = new PlayerList();
         for(Player p : playerList){
             if(country != null && country.equalsIgnoreCase(p.getCountry()) && club != null && p.getClub().equalsIgnoreCase(club)) {
-                return p;
+                pl.addPlayer(p);
             }
         }
-        return null;
+        return pl;
     }
 
 

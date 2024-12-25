@@ -1,0 +1,20 @@
+.text-field-container {
+    -fx-spacing: 10; /* Space between TextFields */
+    -fx-padding: 20; /* Padding around the container */
+}
+
+.text-field-container .button {
+    -fx-alignment: center;
+    -fx-padding: 10;
+    -fx-spacing: 15;
+}
+
+.text-field {
+    -fx-pref-width: 200px; /* Ensure equal width for TextFields */
+    -fx-padding: 5px; /* Padding inside TextFields */
+}
+
+.button {
+    -fx-pref-width: 100px; /* Fixed width for buttons */
+    -fx-padding: 10px; /* Padding inside the button */
+}

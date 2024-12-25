@@ -46,6 +46,12 @@ public class ReadThreadServer implements Runnable {
                         }
                         socketWrapper.write(loginDTO);
                     }
+                    else if(o instanceof GetAllPlayersDTO){
+                        GetAllPlayersDTO getAllPlayersDTO = (GetAllPlayersDTO) o;
+                        getAllPlayersDTO.setPlayers(playerListService.getPlayerList());
+                        getAllPlayersDTO.setStatus(true);
+                        socketWrapper.write(getAllPlayersDTO);
+                    }
                     else if(o instanceof ClubDTO){
                         System.out.println("Server received a request clubDTO");
                         ClubDTO clubDTO = (ClubDTO) o;

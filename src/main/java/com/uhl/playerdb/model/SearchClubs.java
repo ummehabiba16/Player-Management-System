@@ -18,7 +18,6 @@ public class SearchClubs extends Menu{
             "Player(s) with the maximum age of a club",
             "Player(s) with the maximum height of a club",
             "Total yearly salary of a club",
-            "Find clubwise position Count and Countrywise Count",
             "Back to Main"
     );
     

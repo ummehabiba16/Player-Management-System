@@ -2,10 +2,7 @@ package com.uhl.playerdb;
 
 import com.uhl.playerdb.Networking.ReadThread;
 import com.uhl.playerdb.Networking.SocketWrapper;
-import com.uhl.playerdb.controller.BuyPlayerController;
-import com.uhl.playerdb.controller.Controller;
-import com.uhl.playerdb.controller.MainMenuController;
-import com.uhl.playerdb.controller.WelcomeController;
+import com.uhl.playerdb.controller.*;
 import com.uhl.playerdb.model.MenuContext;
 import com.uhl.playerdb.model.Player;
 import javafx.application.Application;
@@ -36,6 +33,7 @@ public class PlayerDBApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 640, 480);
         //MenuContext mc = new MenuContext();
         WelcomeController controller = fxmlLoader.getController();
+        controller.setMain(this);
         controller.setStage(stage);
         controller.setSocketWrapper(socketWrapper);
         stage.setTitle("Player Management System");
@@ -86,9 +84,11 @@ public class PlayerDBApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 640, 480);
         MainMenuController mainMenuController = fxmlLoader.getController();
         controller = mainMenuController;
+        controller.setClubName(username);
         mainMenuController.setStage(stage);
         mainMenuController.setSocketWrapper(socketWrapper);
-        mainMenuController.updatePlayerList(playerList);
+        //mainMenuController.updatePlayerList(playerList);
+
         stage.setTitle(username);
         stage.setScene(scene);
         stage.show();
@@ -109,7 +109,40 @@ public class PlayerDBApplication extends Application {
         stage.show();
     }
 
-    public void showSearchPlayers(String clubName) {
+    public void showSearchPlayers(List<Player> playerList) throws IOException {
+        System.out.println("switching scene to search players");
+        //switch scene to buyPlayer
+        FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("searchPlayer.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        SearchPlayerController controller = fxmlLoader.getController();
+        this.controller = controller;
+        controller.setPlayerListService(playerList);
+        controller.setSocketWrapper(socketWrapper);
+        controller.setStage(stage);
 
+        //
+        controller.hideAll();
+        controller.setMain(this);
+        stage.setTitle("Buy player");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void showSearchClubs(String clubName, List<Player> playerList) throws IOException {
+        System.out.println("switching scene to search clubs");
+        //switch scene to buyPlayer
+        FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("searchClub.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        SearchClubController controller = fxmlLoader.getController();
+        this.controller = controller;
+        controller.setClubService(playerList);
+        controller.setSocketWrapper(socketWrapper);
+        controller.setStage(stage);
+
+        controller.setMain(this);
+
+        stage.setTitle("Search Clubs");
+        stage.setScene(scene);
+        stage.show();
     }
 }
