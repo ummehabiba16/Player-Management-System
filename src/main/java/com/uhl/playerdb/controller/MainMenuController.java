@@ -1,25 +1,12 @@
 package com.uhl.playerdb.controller;
 
+import com.uhl.playerdb.DTO.AddPlayerDTO;
+import com.uhl.playerdb.DTO.ClubDTO;
 import com.uhl.playerdb.DTO.GetAllPlayersDTO;
-import com.uhl.playerdb.DTO.PlayerTransferDTO;
 import com.uhl.playerdb.DTO.TransferListDTO;
-import com.uhl.playerdb.PlayerDBApplication;
-import com.uhl.playerdb.model.*;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
 
 import java.io.IOException;
-import java.util.List;
 
 public class MainMenuController extends Controller {
 
@@ -45,14 +32,14 @@ public class MainMenuController extends Controller {
         }
     }
     public void onClickAddPlayer(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("addPlayer.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
-        AddPlayerController controller = fxmlLoader.getController();
-        controller.setStage(stage);
-
-        stage.setTitle("Add new player");
-        stage.setScene(scene);
-        stage.show();
+        AddPlayerDTO addPlayerDTO = new AddPlayerDTO();
+        addPlayerDTO.setFrom(clubName);
+        try {
+            socketWrapper.write(addPlayerDTO);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        //main.showAddPlayer(clubName, addPlayerDTO.getClubs());
     }
     public void onClickExit(ActionEvent actionEvent) {
 
@@ -69,13 +56,13 @@ public class MainMenuController extends Controller {
     }
 
     public void onClickMyPlayers(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("addPlayer.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
-        MainMenuController controller = fxmlLoader.getController();
-        controller.setStage(stage);
-
-        stage.setTitle("Add new player");
-        stage.setScene(scene);
-        stage.show();
+        ClubDTO clubDTO = new ClubDTO();
+        clubDTO.setClubName(clubName);
+        System.out.println("clubDTO has club name " + clubDTO.getClubName());
+        try {
+            socketWrapper.write(clubDTO);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

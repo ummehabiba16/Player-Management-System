@@ -1,6 +1,7 @@
 package com.uhl.playerdb.DTO;
 
 import com.uhl.playerdb.model.Player;
+import com.uhl.playerdb.service.PlayerListService;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 public class UpdateTransferListDTO implements Serializable {
 
     private List<Player> transferList;
+    private PlayerListService playerListService;
     private boolean status;
 
     public List<Player> getTransferList() {
@@ -24,5 +26,13 @@ public class UpdateTransferListDTO implements Serializable {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public PlayerListService getPlayerListService() {
+        return playerListService;
+    }
+
+    public void setPlayerListService(PlayerListService playerListService) {
+        this.playerListService = playerListService;
     }
 }

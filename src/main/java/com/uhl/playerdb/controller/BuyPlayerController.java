@@ -13,6 +13,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
 import java.util.List;
 
 public class BuyPlayerController extends Controller {
@@ -49,8 +50,8 @@ public class BuyPlayerController extends Controller {
                         try{
                             BuyPlayerDTO buyPlayerDTO = new BuyPlayerDTO();
                             buyPlayerDTO.setPlayer(player);
-                            System.out.println("***** " + socketWrapper.getClientUsername());
-                            buyPlayerDTO.setBuyerClubName(socketWrapper.getClientUsername());
+                            System.out.println("***** " + clubName);
+                            buyPlayerDTO.setBuyerClubName(clubName);
                             socketWrapper.write(buyPlayerDTO);
                         }catch(Exception e){
                             e.printStackTrace();
@@ -74,6 +75,9 @@ public class BuyPlayerController extends Controller {
         Platform.runLater(() -> playerListView.refresh());
     }
 
-    public void handleBack(ActionEvent actionEvent) {
+    public void handleBack(ActionEvent actionEvent) throws IOException {
+
+        System.out.println("Back button clicked from BuyPlayerController, clubName :" + clubName);
+        main.showMainMenu(clubName);
     }
 }

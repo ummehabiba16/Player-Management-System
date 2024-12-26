@@ -119,7 +119,9 @@ public class SearchClubController extends Controller {
     }
 
     public void onClickBackButton(ActionEvent actionEvent) throws IOException {
-        main.showMainMenu("Main Menu", clubService.getPlayerList());
+
+        System.out.println("Back button clicked from searchClubController, clubName :" + clubName);
+        main.showMainMenu(clubName);
     }
 
     public void onClickSearch(ActionEvent actionEvent) {

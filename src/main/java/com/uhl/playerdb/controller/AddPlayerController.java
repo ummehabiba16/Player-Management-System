@@ -1,19 +1,13 @@
 package com.uhl.playerdb.controller;
 
 import com.uhl.playerdb.DTO.AddPlayerDTO;
-import com.uhl.playerdb.DTO.PlayerTransferDTO;
-import com.uhl.playerdb.DTO.TransferListDTO;
-import com.uhl.playerdb.PlayerDBApplication;
 import com.uhl.playerdb.model.*;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,68 +21,95 @@ public class AddPlayerController extends Controller {
     public TextField jerseyNumber;
     public TextField weeklySalary;
 
+    @FXML
     public ComboBox<String> clubComboBox;
+    @FXML
     public ComboBox<String> positionComboBox;
 
-    public void onClickSearchPlayers(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("searchPlayer.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
-        MainMenuController controller = fxmlLoader.getController();
-        controller.setStage(stage);
+    private List<String> clubs;
 
-        stage.setTitle("Search Players");
-        stage.setScene(scene);
-        stage.show();
+    @FXML
+    public void initialize() {
+        positionComboBox.setItems(FXCollections.observableArrayList(
+                "Allrounder", "Batsman", "Bowler", "Wicketkeeper"
+        ));
+    }
+    public void onClickBack(ActionEvent actionEvent) throws IOException {
+        main.showMainMenu(clubName);
     }
 
-    public void onClickSearchClubs(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("searchClub.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
-        MainMenuController controller = fxmlLoader.getController();
-        controller.setStage(stage);
-
-        stage.setTitle("Search Clubs");
-        stage.setScene(scene);
-        stage.show();
-    }
-    public void onClickAddPlayer(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("addPlayer.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
-        MainMenuController controller = fxmlLoader.getController();
-        controller.setStage(stage);
-
-        stage.setTitle("Add new player");
-        stage.setScene(scene);
-        stage.show();
-    }
-    public void onClickExit(ActionEvent actionEvent) {
-
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
-    public void onClickBuyPlayer(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+    public boolean checkNull(){
+        if(name.getText().isEmpty()){
+            showAlert("Name empty", "Name cannot be empty");
+            return false;
+        }
+        else if(country.getText().isEmpty()){
+            showAlert("Country empty", "Country cannot be empty");
+            return false;
+        }
+        else if(age.getText().isEmpty()){
+            showAlert("Age empty", "Age cannot be empty");
+            return false;
+        }
+        else if(height.getText().isEmpty()){
+            showAlert("Height empty", "Height cannot be empty");
+            return false;
+        }
+        else if(weeklySalary.getText().isEmpty()){
+            showAlert("Weekly salary empty", "Weekly salary cannot be empty");
+            return false;
+        }
+        else if(clubComboBox.getSelectionModel().getSelectedItem() == null){
+            showAlert("Club empty", "Club cannot be empty");
+            return false;
+        }
+        else if(positionComboBox.getSelectionModel().getSelectedItem() == null){
+            showAlert("Position empty", "Position cannot be empty");
+            return false;
+        }
+        else{
+            return true;
+        }
 
-        TransferListDTO transferListDTO = new TransferListDTO();
-        try {
-            socketWrapper.write(transferListDTO);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+    }
+    public void onClickAdd(ActionEvent actionEvent) {
+        AddPlayerDTO addPlayerDTO = new AddPlayerDTO();
+        if(checkNull()){
+            Player player = new Player();
+            player.setName(name.getText().trim());
+            player.setCountry(country.getText().trim());
+            player.setAge(Integer.parseInt(age.getText().trim()));
+            player.setHeight(Double.parseDouble(height.getText().trim()));
+            player.setClub(clubComboBox.getSelectionModel().getSelectedItem());
+            player.setPosition(Position.getPosition(positionComboBox.getSelectionModel().getSelectedItem()));
+            if(jerseyNumber.getText().isEmpty()){
+                player.setJerseyNumber(0);
+            }
+            else{
+                player.setJerseyNumber(Integer.parseInt(jerseyNumber.getText().trim()));
+            }
+            player.setWeeklySalary(Integer.parseInt(weeklySalary.getText().trim()));
+            addPlayerDTO.setP(player);
+            addPlayerDTO.setFrom(clubName);
+            try {
+                socketWrapper.write(addPlayerDTO);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void onClickMyPlayers(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("addPlayer.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
-        MainMenuController controller = fxmlLoader.getController();
-        controller.setStage(stage);
-
-        stage.setTitle("Add new player");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void onClickAdd(ActionEvent actionEvent) {
-        AddPlayerDTO addPlayerDTO = new AddPlayerDTO();
-
-
+    public void setClubs(List<String> clubs) {
+        this.clubs = clubs;
+        System.out.println("clubs received :"+ clubs.size()+" "+clubs.get(0));
+        ObservableList<String> observableClubs = FXCollections.observableArrayList(clubs);
+        clubComboBox.setItems(observableClubs);
     }
 }

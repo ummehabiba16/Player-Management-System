@@ -25,8 +25,8 @@ public class ClubService {
             String clubName = player.getClub();
             clubMap.putIfAbsent(clubName, new Club(clubName));
             clubMap.get(clubName).addPlayer(player);
-            clubList.addAll(clubMap.values());
         }
+        clubList.addAll(clubMap.values());
     }
 
     public boolean addClub(Club newClub){

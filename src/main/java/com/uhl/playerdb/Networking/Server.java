@@ -34,6 +34,22 @@ public class Server {
     public void setClubService(ClubService clubService) {
         this.clubService = clubService;
     }
+    public void setPlayerListService(List<Player> players) {
+        this.playerListService = new PlayerListService();
+        playerListService.setPlayerList(players);
+        this.clubService = new ClubService(players);
+    }
+    public void setClubService(PlayerListService playerListService) {
+        this.clubService = new ClubService(playerListService.getPlayerList());
+    }
+
+    public List<Player> getTransferList() {
+        return transferList;
+    }
+
+    public void setTransferList(List<Player> transferList) {
+        this.transferList = transferList;
+    }
 
     private ServerSocket serverSocket;
     public HashMap<String, String> userMap;
@@ -67,7 +83,7 @@ public class Server {
     public void serve(Socket clientSocket) throws IOException {
         SocketWrapper socketWrapper = new SocketWrapper(clientSocket);
         clientConnections.add(socketWrapper);
-        new ReadThreadServer(userMap, socketWrapper, clubService, playerListService, transferList, clientConnections);
+        new ReadThreadServer(userMap, socketWrapper,clientConnections, this);
     }
 
     public static void main(String[] args) {

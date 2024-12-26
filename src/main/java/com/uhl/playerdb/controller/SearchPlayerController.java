@@ -228,7 +228,8 @@ public class SearchPlayerController extends Controller {
     }
 
     public void onClickBack(ActionEvent actionEvent) throws IOException {
-        main.showMainMenu("Main Menu", playerListService.getPlayerList());
+        System.out.println("Back button clicked from searchPlayerController, clubName :" + clubName);
+        main.showMainMenu(clubName);
     }
 
     public void handleSearch(ActionEvent actionEvent) {

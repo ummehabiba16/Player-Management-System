@@ -3,11 +3,12 @@ package com.uhl.playerdb.service;
 import com.uhl.playerdb.model.Player;
 import com.uhl.playerdb.model.PlayerList;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PlayerListService {
+public class PlayerListService implements Serializable {
     private List<Player> playerList;
 
     public List<Player> getPlayerList() {

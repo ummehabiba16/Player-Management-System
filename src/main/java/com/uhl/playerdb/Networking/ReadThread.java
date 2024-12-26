@@ -4,11 +4,14 @@ import com.uhl.playerdb.DTO.*;
 import com.uhl.playerdb.PlayerDBApplication;
 import com.uhl.playerdb.controller.BuyPlayerController;
 import com.uhl.playerdb.controller.Controller;
+import com.uhl.playerdb.controller.MyPlayerController;
 import com.uhl.playerdb.model.Player;
+import com.uhl.playerdb.service.PlayerListService;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReadThread implements Runnable {
@@ -35,17 +38,35 @@ public class ReadThread implements Runnable {
                         System.out.println(loginDTO.isStatus());
                         if (loginDTO.isStatus()) {
                             //main.getSocketWrapper().setClientUsername(loginDTO.getUsername());
-                            System.out.println("login successful sending clubDTO");
-                            ClubDTO clubDTO = new ClubDTO();
-                            clubDTO.setClubName(loginDTO.getUsername());
-                            main.getSocketWrapper().write(clubDTO);
-                            System.out.println("clubDTO sent");
+                            System.out.println("login successful");
+//                            ClubDTO clubDTO = new ClubDTO();
+//                            clubDTO.setClubName(loginDTO.getUsername());
+//                            main.getSocketWrapper().write(clubDTO);
+//                            System.out.println("clubDTO sent");
+                            main.showMainMenu(loginDTO.getUsername());
                         } else {
                             Platform.runLater(() -> {
                                 main.showAlert();
                             });
                         }
 
+                    }
+                    else if(o instanceof AddPlayerDTO){
+                        AddPlayerDTO addPlayerDTO = (AddPlayerDTO) o;
+                        if(addPlayerDTO.getP() == null){
+                            main.showAddPlayer(addPlayerDTO.getFrom(), addPlayerDTO.getClubs());
+                        }
+                        else {
+                            Platform.runLater(() -> {
+                                try {
+                                    main.showAddPlayer(addPlayerDTO.getFrom(), addPlayerDTO.getClubs());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                main.showAlert("Successful", "Player added successfully");
+
+                            });
+                        }
                     }
                     else if(o instanceof GetAllPlayersDTO){
                         GetAllPlayersDTO getAllPlayersDTO = (GetAllPlayersDTO) o;
@@ -95,10 +116,11 @@ public class ReadThread implements Runnable {
                                 if (clubDTO.isStatus()) {
                                     System.out.println("Successfully received players");
                                     List<Player> players = clubDTO.getPlayerList(); // Assuming getPlayers() gives you List<PlayerDTO>
+                                    //PlayerListService playerListService = clubDTO.getPlayerListService();
                                     System.out.println(players.size() + " players received : " + players.get(0).getName());
                                     Platform.runLater(() -> {
                                     try {
-                                        main.showMainMenu(clubDTO.getClubName(), players);
+                                        main.showMyPlayers(clubDTO.getClubName(), players);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -142,7 +164,7 @@ public class ReadThread implements Runnable {
                     }
                     else if(o instanceof TransferListDTO) {
                         TransferListDTO transferListDTO = (TransferListDTO) o;
-                        System.out.println("Instance of transferListDto" + transferListDTO.isStatus());
+                        System.out.println("Instance of transferListDTO " + transferListDTO.isStatus());
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
@@ -181,9 +203,46 @@ public class ReadThread implements Runnable {
                                 buyPlayerController.updatePlayerList(updateTransferListDTO.getTransferList());
                             });
                         }
+
 //                        Platform.runLater(new Runnable() {
 //                            main.
 //                        })
+                    }
+                    else if(o instanceof UpdateClubDTO){
+                        System.out.println("client received Instance of UpdateClubDTO");
+                        UpdateClubDTO updateClubDTO = (UpdateClubDTO) o;
+                        Controller controller = main.getController();
+                        System.out.println("Controller instance: " + controller.getClass().getName());
+
+                        //? pending :: more updates
+                        if(controller instanceof MyPlayerController){
+                            System.out.println("Instance of MyPlayerController, updating playerList");
+                            MyPlayerController myPlayerController = (MyPlayerController) controller;
+                            Platform.runLater(() -> {
+                                myPlayerController.updatePlayerList(updateClubDTO.getPl());
+                            });
+                        }
+
+//                        Platform.runLater(new Runnable() {
+//                            main.
+//                        })
+                    }
+                    else if(o instanceof UpdateAllDTO){
+                        System.out.println("client received Instance of UpdateAllDTO");
+                        UpdateAllDTO updateAllDTO = (UpdateAllDTO) o;
+                        for(Player p: updateAllDTO.getPlayerListService().getPlayerList()){
+                            System.out.println(p.getName()+" "+p.getClub());
+                        }
+                        main.getSocketWrapper().write(updateAllDTO);
+                    }
+                    else if(o instanceof BuyPlayerDTO){
+                        //all clubs except buyer receives this
+                        System.out.println("client received Instance of BuyPlayerDTO");
+                        BuyPlayerDTO buyPlayerDTO = (BuyPlayerDTO) o;
+                        UpdateBuyDTO updateBuyDTO = new UpdateBuyDTO();
+                        updateBuyDTO.setPlayer(buyPlayerDTO.getPlayer());
+                        updateBuyDTO.setBuyerClubName(buyPlayerDTO.getBuyerClubName());
+                        main.getSocketWrapper().write(updateBuyDTO);
                     }
                 }
             }
