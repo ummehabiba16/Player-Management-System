@@ -243,4 +243,16 @@ public class PlayerDBApplication extends Application {
         });
 
     }
+
+    public void showWelcomePage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("welcome.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        WelcomeController controller = fxmlLoader.getController();
+        controller.setMain(this);
+        controller.setStage(stage);
+        controller.setSocketWrapper(socketWrapper);
+        stage.setTitle("Player Management System");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

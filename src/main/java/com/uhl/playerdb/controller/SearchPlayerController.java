@@ -8,10 +8,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -63,6 +65,42 @@ public class SearchPlayerController extends Controller {
             countryCountList.add(new CountryCount(entry.getKey(), entry.getValue()));
         }
     }
+    public void showPlayerDetails(Player player) {
+        if (player == null) {
+            System.out.println("Player not found.");
+            return;
+        }
+
+        // Create a new stage (pop-up window)
+        Stage playerInfoStage = new Stage();
+        playerInfoStage.setTitle("Player Details");
+
+        // Create labels to display player details
+        Label nameLabel = new Label("Name: " + player.getName());
+        Label countryLabel = new Label("Country: " + player.getCountry());
+        Label ageLabel = new Label("Age: " + player.getAge() + " years");
+        Label heightLabel = new Label("Height: " + player.getHeight() + " meters");
+        Label clubLabel = new Label("Club: " + player.getClub());
+        Label positionLabel = new Label("Position: " + player.getPosition());
+        Label jerseyNumberLabel = new Label("Jersey Number: " + player.getJerseyNumber());
+        Label weeklySalaryLabel = new Label("Weekly Salary: $" + player.getWeeklySalary());
+
+        // Create a "Hide" button to close the pop-up window
+        Button hideButton = new Button("Hide");
+        hideButton.setOnAction(e -> playerInfoStage.close());
+
+        // Layout the player details and hide button in a VBox
+        VBox playerInfoBox = new VBox(10, nameLabel, countryLabel, ageLabel, heightLabel, clubLabel, positionLabel, jerseyNumberLabel, weeklySalaryLabel, hideButton);
+        playerInfoBox.setPadding(new Insets(10));
+
+        // Set the VBox as the scene of the new stage
+        Scene scene = new Scene(playerInfoBox, 300, 400);
+        playerInfoStage.setScene(scene);
+
+        // Show the pop-up window
+        playerInfoStage.show();
+    }
+
 
     // Player info show
     void showPlayerInfo(Player player) {
@@ -123,18 +161,11 @@ public class SearchPlayerController extends Controller {
                     // Create UI components for each item
                     Label nameLabel = new Label(player.getName());
                     Label countryLabel = new Label(player.getCountry());
-                    Button transferButton = new Button("Transfer");
+                    Button transferButton = new Button("Details");
                     // Handle transfer button action
                     transferButton.setOnAction(event -> {
-                        System.out.println("Transfer button clicked for player: " + player.getName());
-                        // Add transfer logic here
-//                        try{
-//                            PlayerTransferDTO transferDTO = new PlayerTransferDTO();
-//                            transferDTO.setPlayer(player);
-//                            socketWrapper.write(transferDTO);
-//                        }catch(Exception e){
-//                            e.printStackTrace();
-//                        }
+                        System.out.println("Details button clicked for player: " + player.getName());
+                        showPlayerDetails(player);
                     });
 
                     // Layout the components (e.g., in an HBox or VBox)

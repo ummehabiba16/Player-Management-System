@@ -9,7 +9,9 @@ import com.uhl.playerdb.service.PlayerListService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+
 
 public class ReadThreadServer implements Runnable {
     private final Thread thr;
@@ -18,11 +20,11 @@ public class ReadThreadServer implements Runnable {
     //private PlayerListService playerListService;
     //private ClubService clubService;
     //private List<Player> transferList ;
-    private List<SocketWrapper> clientConnections;
+    //private List<SocketWrapper> clientConnections;
     private Server server;
 
 
-    public ReadThreadServer(HashMap<String, String> map, SocketWrapper socketWrapper, List<SocketWrapper> clientConnections, Server server) throws IOException {
+    public ReadThreadServer(HashMap<String, String> map, SocketWrapper socketWrapper, Server server) throws IOException {
         this.userMap = map;
         this.socketWrapper = socketWrapper;
         this.server = server;
@@ -30,7 +32,7 @@ public class ReadThreadServer implements Runnable {
         //this.clubService = clubService;
         //this.playerListService = playerListService;
         //this.transferList = transferList;
-        this.clientConnections = clientConnections;
+        //this.clientConnections = clientConnections;
         this.thr = new Thread(this);
         thr.start();
     }
@@ -74,6 +76,7 @@ public class ReadThreadServer implements Runnable {
                         server.setTransferList(tl);
                         playerTransferDTO.setStatus(true); // ? pending :: remove status
                         UpdateTransferListDTO updateTransferListDTO = new UpdateTransferListDTO();
+                        List<SocketWrapper> clientConnections = server.getClientConnections();
                         for(SocketWrapper client : clientConnections){
                             if(client.getClientUsername().equals("Anonymous")){
                                 continue;
@@ -139,6 +142,7 @@ public class ReadThreadServer implements Runnable {
                         //buyPlayerDTO.setStatus(true); // ? pending :: remove status
                         UpdateTransferListDTO updateTransferListDTO = new UpdateTransferListDTO();
                         UpdateClubDTO updateClubDTO = new UpdateClubDTO();
+                        List<SocketWrapper> clientConnections = server.getClientConnections();
                         for(SocketWrapper client : clientConnections){
                             if(client.getClientUsername().equals("Anonymous")){
                                 continue;
@@ -218,6 +222,7 @@ public class ReadThreadServer implements Runnable {
                             playerListService.setPlayerList(pl);
                             server.setPlayerListService(playerListService.getPlayerList());
                             updatePlayerListDTO.setPlayerListService(playerListService);
+                            List<SocketWrapper> clientConnections = server.getClientConnections();
                             for (SocketWrapper client : clientConnections) {
                                 if (client.getClientUsername().equals("Anonymous")) {
                                     continue;
@@ -230,6 +235,13 @@ public class ReadThreadServer implements Runnable {
                             socketWrapper.write(addPlayerDTO);
                         }
                     }
+                    else if (o instanceof DisconnectDTO) {
+                        DisconnectDTO disconnectDTO = (DisconnectDTO) o;
+                        String clientUsername = disconnectDTO.getClientUsername();
+                        server.removeClient(clientUsername);
+                        // Find the socket wrapper by clientUsername and remove it from the list
+                    }
+
                 }
             }
         } catch (Exception e) {

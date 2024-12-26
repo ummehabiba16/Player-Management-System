@@ -1,9 +1,6 @@
 package com.uhl.playerdb.controller;
 
-import com.uhl.playerdb.DTO.AddPlayerDTO;
-import com.uhl.playerdb.DTO.ClubDTO;
-import com.uhl.playerdb.DTO.GetAllPlayersDTO;
-import com.uhl.playerdb.DTO.TransferListDTO;
+import com.uhl.playerdb.DTO.*;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
@@ -41,8 +38,23 @@ public class MainMenuController extends Controller {
         }
         //main.showAddPlayer(clubName, addPlayerDTO.getClubs());
     }
-    public void onClickExit(ActionEvent actionEvent) {
-
+    public void onClickExit(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        DisconnectDTO disconnectDTO = new DisconnectDTO(clubName);
+        socketWrapper.write(disconnectDTO);
+        try {
+            if (socketWrapper != null) {
+                socketWrapper.closeConnection(); // Close the connection to the server
+                System.out.println("Connection to server closed.");
+            }
+        } catch (IOException e) {
+            System.err.println("Error while closing the connection: " + e.getMessage());
+            e.printStackTrace();
+        }
+        if (stage != null) {
+            stage.close(); // Close the current window
+        } else {
+            System.out.println("No stage available to close.");
+        }
     }
 
     public void onClickBuyPlayer(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
@@ -63,6 +75,14 @@ public class MainMenuController extends Controller {
             socketWrapper.write(clubDTO);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void onClickLogOut(ActionEvent actionEvent) {
+        try {
+            main.showWelcomePage();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

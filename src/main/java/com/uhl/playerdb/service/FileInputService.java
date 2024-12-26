@@ -11,11 +11,11 @@ import java.util.List;
 
 public class FileInputService {
 
-    private final String INPUT_FILE_NAME = "players.txt";
+    //private final String INPUT_FILE_NAME = "players.txt";
     private List<Player> playerList = new ArrayList<Player>();
-    public List<Player> readFile() {
+    public List<Player> readFile(String fileName) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(INPUT_FILE_NAME))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
                 playerList.add(MakePlayerService.getPlayer(line));
@@ -23,7 +23,7 @@ public class FileInputService {
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
         } catch (NullPointerException e) {
-            System.out.println("File not found in resources: " + INPUT_FILE_NAME);
+            System.out.println("File not found in resources: " + fileName);
         }
         return playerList;
     }

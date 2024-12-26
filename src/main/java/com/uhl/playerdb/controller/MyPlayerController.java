@@ -11,12 +11,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
@@ -52,6 +55,12 @@ public class MyPlayerController extends Controller {
                     // Create UI components for each item
                     Label nameLabel = new Label(player.getName());
                     Label countryLabel = new Label(player.getCountry());
+                    Button detailsButton = new Button("Details");
+                    detailsButton.setOnAction(event -> {
+                        System.out.println("Details button clicked for player: " + player.getName());
+                        showPlayerDetails(player);
+                    });
+
                     Button transferButton = new Button("Transfer");
                     // Handle transfer button action
                     transferButton.setOnAction(event -> {
@@ -67,7 +76,7 @@ public class MyPlayerController extends Controller {
                     });
 
                     // Layout the components (e.g., in an HBox or VBox)
-                    HBox hbox = new HBox(10, nameLabel, countryLabel, transferButton);
+                    HBox hbox = new HBox(10, nameLabel, countryLabel, detailsButton, transferButton);
                     setGraphic(hbox); // Set the layout to the cell
                 }
             }
@@ -93,5 +102,40 @@ public class MyPlayerController extends Controller {
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
 
         main.showMainMenu(clubName);
+    }
+    public void showPlayerDetails(Player player) {
+        if (player == null) {
+            System.out.println("Player not found.");
+            return;
+        }
+
+        // Create a new stage (pop-up window)
+        Stage playerInfoStage = new Stage();
+        playerInfoStage.setTitle("Player Details");
+
+        // Create labels to display player details
+        Label nameLabel = new Label("Name: " + player.getName());
+        Label countryLabel = new Label("Country: " + player.getCountry());
+        Label ageLabel = new Label("Age: " + player.getAge() + " years");
+        Label heightLabel = new Label("Height: " + player.getHeight() + " meters");
+        Label clubLabel = new Label("Club: " + player.getClub());
+        Label positionLabel = new Label("Position: " + player.getPosition());
+        Label jerseyNumberLabel = new Label("Jersey Number: " + player.getJerseyNumber());
+        Label weeklySalaryLabel = new Label("Weekly Salary: $" + player.getWeeklySalary());
+
+        // Create a "Hide" button to close the pop-up window
+        Button hideButton = new Button("Hide");
+        hideButton.setOnAction(e -> playerInfoStage.close());
+
+        // Layout the player details and hide button in a VBox
+        VBox playerInfoBox = new VBox(10, nameLabel, countryLabel, ageLabel, heightLabel, clubLabel, positionLabel, jerseyNumberLabel, weeklySalaryLabel, hideButton);
+        playerInfoBox.setPadding(new Insets(10));
+
+        // Set the VBox as the scene of the new stage
+        Scene scene = new Scene(playerInfoBox, 300, 400);
+        playerInfoStage.setScene(scene);
+
+        // Show the pop-up window
+        playerInfoStage.show();
     }
 }

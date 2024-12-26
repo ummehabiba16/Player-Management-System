@@ -8,9 +8,9 @@ import java.util.List;
 public class PlayerRepository {
     private List<Player> playerList;
 
-    public static List<Player> getPlayersFromFile() {
+    public static List<Player> getPlayersFromFile(String fileName) {
         FileInputService fileInputService = new FileInputService();
-        return fileInputService.readFile();
+        return fileInputService.readFile(fileName);
     }
 
     public List<Player> getPlayerList() {

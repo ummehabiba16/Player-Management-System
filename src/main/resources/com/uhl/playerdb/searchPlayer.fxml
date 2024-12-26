@@ -17,10 +17,10 @@
          <children>
             <Button layoutX="40.0" layoutY="57.0" mnemonicParsing="false" onAction="#onClickByPlayerName" text="By Player Name" />
             <Button layoutX="27.0" layoutY="101.0" mnemonicParsing="false" onAction="#onClickByClubAndCountry" text="By Club and Country" />
-            <Button layoutX="42.0" layoutY="199.0" mnemonicParsing="false" onAction="#onClickByPosition" text="By Position" />
-            <Button layoutX="35.0" layoutY="283.0" mnemonicParsing="false" onAction="#onClickBySalaryRange" text="By Salary Range" />
-            <Button layoutX="9.0" layoutY="239.0" mnemonicParsing="false" onAction="#onClickCountrywiseCount" text="Country-wise player Count" />
-            <Button layoutX="31.0" layoutY="151.0" mnemonicParsing="false" onAction="#onClickBack" text="Back to main menu" />
+            <Button layoutX="48.0" layoutY="150.0" mnemonicParsing="false" onAction="#onClickByPosition" text="By Position" />
+            <Button layoutX="34.0" layoutY="249.0" mnemonicParsing="false" onAction="#onClickBySalaryRange" text="By Salary Range" />
+            <Button layoutX="5.0" layoutY="199.0" mnemonicParsing="false" onAction="#onClickCountrywiseCount" text="Country-wise player Count" />
+            <Button layoutX="27.0" layoutY="337.0" mnemonicParsing="false" onAction="#onClickBack" text="Back to main menu" />
          </children></AnchorPane>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>

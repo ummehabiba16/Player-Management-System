@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileOutputService {
-    private static final String OUTPUT_FILE_NAME = "players.txt";
+    //private static final String OUTPUT_FILE_NAME = "players.txt";
 
-    public static void writeFile(List<Player> players) {
+    public static void writeFile(List<Player> players, String fileName) {
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(OUTPUT_FILE_NAME))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             for(Player p : players){
                 if(p.getJerseyNumber() != 0) {
                     String line = p.getName() + "," + p.getCountry() + "," + p.getAge() + "," + p.getHeight() + "," + p.getClub() + "," + p.getPosition() + "," + p.getJerseyNumber() + "," + p.getWeeklySalary();
