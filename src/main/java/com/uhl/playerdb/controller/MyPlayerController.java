@@ -39,6 +39,8 @@ public class MyPlayerController extends Controller {
     // Observable list to hold player data
     protected ObservableList<Player> playerList = FXCollections.observableArrayList();
 
+    private List<Player> transferList;
+
     @FXML
     public void initialize() {
         setupPlayerListView();
@@ -63,28 +65,36 @@ public class MyPlayerController extends Controller {
                         System.out.println("Details button clicked for player: " + player.getName());
                         showPlayerDetails(player);
                     });
-
                     Button transferButton = new Button("Transfer");
                     transferButton.setFont(new Font("American Typewriter", 12));
-                    // Handle transfer button action
-                    transferButton.setOnAction(event -> {
-                        System.out.println("Transfer button clicked for player: " + player.getName());
-                        // Add transfer logic here
-                        try{
-                            PlayerTransferDTO transferDTO = new PlayerTransferDTO();
-                            transferDTO.setPlayer(player);
-                            socketWrapper.write(transferDTO);
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
-                    });
+                    if (transferList.contains(player)) {
+                        transferButton.setDisable(true);
+                        transferButton.setText("Requested");
+                    }
+                    else{
+                        // Handle transfer button action
+                        transferButton.setOnAction(event -> {
+                            System.out.println("Transfer button clicked for player: " + player.getName());
+                            //to update ui
+                            transferList.add(player);
+                            transferButton.setDisable(true);
+                            transferButton.setText("Requested");
+                            // Add transfer logic here
+                            try{
+                                PlayerTransferDTO transferDTO = new PlayerTransferDTO();
+                                transferDTO.setPlayer(player);
+                                socketWrapper.write(transferDTO);
+                            }catch(Exception e){
+                                e.printStackTrace();
+                            }
+                        });
+                    }
                     Region spacer = new Region();
                     HBox.setHgrow(spacer, Priority.ALWAYS);
                     HBox hbox = new HBox(10, nameLabel, spacer, detailsButton, transferButton);
                     hbox.setAlignment(Pos.CENTER_LEFT);
                     hbox.setStyle("-fx-padding: 10;-fx-background-color: #f4f0e0;");
-                    setGraphic(hbox); // Set the layout to the cell
-
+                    setGraphic(hbox);
                 }
             }
         });
@@ -227,5 +237,9 @@ public class MyPlayerController extends Controller {
 
         // Show the pop-up window
         playerInfoStage.show();
+    }
+
+    public void updateTransferList(List<Player> transferList) {
+        this.transferList = transferList;
     }
 }

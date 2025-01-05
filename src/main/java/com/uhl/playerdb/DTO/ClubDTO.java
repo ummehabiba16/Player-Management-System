@@ -12,6 +12,16 @@ public class ClubDTO implements Serializable {
     private List<Player> playerList;
     private PlayerListService playerListService;
 
+    private List<Player> transferList;
+
+    public List<Player> getTransferList() {
+        return transferList;
+    }
+
+    public void setTransferList(List<Player> transferList) {
+        this.transferList = transferList;
+    }
+
     public void setPlayerListService(PlayerListService playerListService) {
         this.playerListService = playerListService;
     }

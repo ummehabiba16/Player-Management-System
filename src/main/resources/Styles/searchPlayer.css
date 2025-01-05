@@ -1,4 +1,3 @@
-/* Base style for all buttons */
 .button {
     -fx-background-color: #ad4343;
     -fx-text-fill: white;
@@ -8,7 +7,7 @@
     -fx-padding: 10px 20px;
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 2);
 }
-/* Hover effect for all buttons */
+
 .button:hover {
     -fx-background-color: #8b3737;
     -fx-text-fill: white;
@@ -19,12 +18,40 @@
     -fx-scale-y: 1.1;
 }
 
-/* Custom style for the Exit button */
 .button.exit {
-    -fx-background-color: #e74c3c;  /* Red color */
+    -fx-background-color: #e74c3c;
 }
 
-/* Hover effect for Exit button */
 .button.exit:hover {
-    -fx-background-color: #c0392b;  /* Darker red for hover */
+    -fx-background-color: #c0392b;
+}
+
+
+.list-view {
+    -fx-focus-color: transparent;
+    -fx-background-color: #f4f0e0;
+    -fx-control-inner-background: #f4f0e0;
+    -fx-background-insets: 0;
+}
+
+.list-view .placeholder {
+    -fx-background-color: #f4f0e0;
+}
+
+.list-view .list-cell:focused {
+    -fx-border-color: #ad4343;
+    -fx-border-width: 2px;
+    -fx-text-fill: black;
+    -fx-padding: 5px;
+}
+
+.list-view .list-cell:selected {
+    -fx-border-color: #ad4343;
+    -fx-border-width: 2px;
+    -fx-background-color: #f4f0e0;
+    -fx-text-fill: black;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #f4f0e0;
 }

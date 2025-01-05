@@ -63,6 +63,7 @@ public class ReadThreadServer implements Runnable {
                         String clubName = clubDTO.getClubName();
                         System.out.println("Club Name: " + clubName);
                         clubDTO.setPlayerList(server.getClubService().getPlayersByClub(clubName));
+                        clubDTO.setTransferList(server.getTransferList());
                         clubDTO.setStatus(true);
                         clubDTO.setPlayerListService(server.getPlayerListService());
                         System.out.println(clubDTO.getClubName());

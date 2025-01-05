@@ -176,12 +176,12 @@ public class PlayerDBApplication extends Application {
         controller.setClubName(clubName);
         controller.setMain(this);
 
-        stage.setTitle("Search Clubs");
+        stage.setTitle(clubName);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void showMyPlayers(String clubName, List<Player> players) throws IOException {
+    public void showMyPlayers(String clubName, List<Player> players, List<Player> transferList) throws IOException {
         System.out.println("switching scene to my players");
         //switch scene to buyPlayer
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("MyPlayer.fxml"));
@@ -195,7 +195,8 @@ public class PlayerDBApplication extends Application {
         controller.setClubName(clubName);
         //controller.setPlayerListService(playerListService);
         controller.updatePlayerList(players);
-        stage.setTitle("Search Clubs");
+        controller.updateTransferList(transferList);
+        stage.setTitle(clubName);
         stage.setScene(scene);
         stage.show();
     }

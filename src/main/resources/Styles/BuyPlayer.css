@@ -16,3 +16,32 @@
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
 }
+
+.list-view {
+    -fx-focus-color: transparent;
+    -fx-background-color: #f4f0e0;
+    -fx-control-inner-background: #f4f0e0;
+    -fx-background-insets: 0;
+}
+
+.list-view .placeholder {
+    -fx-background-color: #f4f0e0;
+}
+
+.list-view .list-cell:focused {
+    -fx-border-color: #ad4343;
+    -fx-border-width: 1px;
+    -fx-text-fill: black;
+    -fx-padding: 5px;
+}
+
+.list-view .list-cell:selected {
+    -fx-border-color: #ad4343;
+    -fx-border-width: 2px;
+    -fx-background-color: #f4f0e0;
+    -fx-text-fill: black;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #f4f0e0;
+}

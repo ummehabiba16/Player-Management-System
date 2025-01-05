@@ -77,7 +77,7 @@ public class Server {
 
     private void handleServerShutdown() {
         System.out.println("Server shutting down...");
-        FileOutputService.writeFile(playerListService.getPlayerList(), "output.txt"); //Pending:: change to Player.txt
+        FileOutputService.writeFile(playerListService.getPlayerList(), "players.txt"); //Pending:: change to Player.txt
         FileOutputService.writeFile(transferList, "transferList.txt");
     }
 

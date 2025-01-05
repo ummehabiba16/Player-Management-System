@@ -115,11 +115,12 @@ public class ReadThread implements Runnable {
                                 if (clubDTO.isStatus()) {
                                     System.out.println("Successfully received players");
                                     List<Player> players = clubDTO.getPlayerList(); // Assuming getPlayers() gives you List<PlayerDTO>
+                                    List<Player> transferList = clubDTO.getTransferList();
                                     //PlayerListService playerListService = clubDTO.getPlayerListService();
                                     System.out.println(players.size() + " players received : " + players.get(0).getName());
                                     Platform.runLater(() -> {
                                     try {
-                                        main.showMyPlayers(clubDTO.getClubName(), players);
+                                        main.showMyPlayers(clubDTO.getClubName(), players, transferList);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }

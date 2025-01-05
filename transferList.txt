@@ -1,2 +1,4 @@
 Cameron Green,Australia,25,1.93,Mumbai Indians,Allrounder,25,21000000
 Rohit Sharma,India,37,1.74,Mumbai Indians,Batsman,45,19000000
+Rashid Khan,Afghanistan,26,1.78,Gujarat Titans,Bowler,19,16000000
+Shubman Gill,India,25,1.78,Gujarat Titans,Batsman,77,15000000

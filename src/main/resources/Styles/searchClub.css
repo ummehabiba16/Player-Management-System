@@ -38,23 +38,30 @@
 }
 
 .list-view {
+    -fx-focus-color: transparent;
     -fx-background-color: #f4f0e0;
     -fx-control-inner-background: #f4f0e0;
     -fx-background-insets: 0;
-}
-
-.list-cell {
-    -fx-background-color: #f4f0e0;
 }
 
 .list-view .placeholder {
     -fx-background-color: #f4f0e0;
 }
 
-.list-cell:hover {
-    -fx-background-color: #e0dbcf;
+.list-view .list-cell:focused {
+    -fx-border-color: #ad4343;
+    -fx-border-width: 1px;
+    -fx-text-fill: black;
+    -fx-padding: 5px;
 }
 
-.list-cell:selected {
-    -fx-background-color: #e0dbcf;
+.list-view .list-cell:selected {
+    -fx-border-color: #ad4343;
+    -fx-border-width: 2px;
+    -fx-background-color: #f4f0e0;
+    -fx-text-fill: black;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #f4f0e0;
 }

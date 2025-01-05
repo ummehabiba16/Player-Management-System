@@ -30,6 +30,7 @@ public class SearchPlayerController extends Controller {
     public TextField input2;
     public ComboBox<String> comboBox1;
     public Button searchButton;
+    public Label notFoundLabel;
     private PlayerListService playerListService;
     private int menuIndex;
     @FXML
@@ -313,6 +314,7 @@ public class SearchPlayerController extends Controller {
         label1.setVisible(false);
         input2.setVisible(false);
         label2.setVisible(false);
+        notFoundLabel.setVisible(false);
         comboBox1.setVisible(false);
         searchButton.setVisible(false);
         vBox.setVisible(false);
@@ -464,10 +466,15 @@ public class SearchPlayerController extends Controller {
                 String countryName = input2.getText().trim();
                 List<Player> pl = playerListService.searchByCountryAndClub(countryName, clubName).getPlayers();
                 System.out.println("Players received:" + pl.size());
-                Platform.runLater(() -> {
-                    updatePlayerList(pl);
-                    playerListView.setVisible(true);
-                });
+                if(pl.isEmpty()){
+                    notFoundLabel.setVisible(true);
+                }
+                else {
+                    Platform.runLater(() -> {
+                        updatePlayerList(pl);
+                        playerListView.setVisible(true);
+                    });
+                }
                 break;
             }
             case 2: {
@@ -476,10 +483,14 @@ public class SearchPlayerController extends Controller {
                 System.out.println("Players received:" + pl.size());
                 setupPlayerListView();
                 updatePlayerList(pl);
-                Platform.runLater(() -> {
-                    playerListView.setVisible(true);
-                    //vBox.getChildren().add(vBox);  // Add it after search if not present
-                });
+                if(pl.isEmpty()){
+                    notFoundLabel.setVisible(true);
+                }
+                else {
+                    Platform.runLater(() -> {
+                        playerListView.setVisible(true);
+                    });
+                }
                 break;
             }
             case 3: {
@@ -489,10 +500,14 @@ public class SearchPlayerController extends Controller {
                 System.out.println("Players received:" + pl.size());
                 setupPlayerListView();
                 updatePlayerList(pl);
-                Platform.runLater(() -> {
-                    playerListView.setVisible(true);
-                    //vBox.getChildren().add(vBox);  // Add it after search if not present
-                });
+                if(pl.isEmpty()){
+                    notFoundLabel.setVisible(true);
+                }
+                else {
+                    Platform.runLater(() -> {
+                        playerListView.setVisible(true);
+                    });
+                }
                 break;
             }
         }
