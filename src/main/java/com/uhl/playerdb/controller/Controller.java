@@ -58,7 +58,7 @@ public class Controller {
     public void switchScene(String name) throws IOException {
         System.out.println("WelcomeController, switching scene to" + name);
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource(name + ".fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         Controller controller = fxmlLoader.getController();
         //controller.setStage(stage);
         stage.setTitle("Main Menu");

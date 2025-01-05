@@ -1,20 +1,28 @@
-.text-field-container {
-    -fx-spacing: 10; /* Space between TextFields */
-    -fx-padding: 20; /* Padding around the container */
+.combo-box {
+    -fx-background-color: #f4f0e0;
+    -fx-font-family: "American Typewriter";
+    -fx-font-size: 10px;
+    -fx-border-color: gray;
+    -fx-border-width: 2px;
+    -fx-border-radius: 16;
+    -fx-padding: 5px;
 }
 
-.text-field-container .button {
-    -fx-alignment: center;
-    -fx-padding: 10;
-    -fx-spacing: 15;
+.combo-box:hover {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: #f4f0e0;
+}
+.list-cell {
+    -fx-background-color: #f4f0e0;
+    -fx-font-family: "American Typewriter";
+    -fx-font-size: 13px;
+    -fx-text-fill: black;
 }
 
-.text-field {
-    -fx-pref-width: 200px; /* Ensure equal width for TextFields */
-    -fx-padding: 5px; /* Padding inside TextFields */
-}
-
-.button {
-    -fx-pref-width: 100px; /* Fixed width for buttons */
-    -fx-padding: 10px; /* Padding inside the button */
+.list-cell:hover {
+    -fx-background-color: #e0dbc7;
 }

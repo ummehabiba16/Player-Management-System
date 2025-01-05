@@ -1,0 +1,18 @@
+.button {
+    -fx-background-color: #ad4343;
+    -fx-text-fill: white;
+    -fx-border-radius: 32px;
+    -fx-padding: 10px 20px;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 2);
+}
+
+/* Hover effect for all buttons */
+.button:hover {
+    -fx-background-color: #8b3737;
+    -fx-text-fill: white;
+    -fx-border-radius: 32px;
+    -fx-padding: 10px 20px;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}

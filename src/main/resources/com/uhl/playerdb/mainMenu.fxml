@@ -2,22 +2,53 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uhl.playerdb.controller.MainMenuController">
-   <children>
-       <Button layoutX="101.0" layoutY="117.0" mnemonicParsing="false" onAction="#onClickSearchPlayers" text="Search Player" />
-       <Button layoutX="63.0" layoutY="187.0" mnemonicParsing="false" onAction="#onClickSearchClubs" text="Search Club" />
-       <Button layoutX="128.0" layoutY="256.0" mnemonicParsing="false" onAction="#onClickAddPlayer" text="Add Player" />
-       <Button layoutX="529.0" layoutY="24.0" mnemonicParsing="false" onAction="#onClickExit" text="Exit" />
-       <Button layoutX="405.0" layoutY="187.0" mnemonicParsing="false" onAction="#onClickBuyPlayer" text="Buy Player" />
-       <Button layoutX="355.0" layoutY="117.0" mnemonicParsing="false" onAction="#onClickMyPlayers" text="My Players" />
-      <Button layoutX="340.0" layoutY="256.0" mnemonicParsing="false" onAction="#onClickLogOut" text="Logout" />
-      <Label layoutX="128.0" layoutY="23.0" text="Player Management System">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f4f0e0;" stylesheets="@../../../Styles/mainMenu.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uhl.playerdb.controller.MainMenuController">
+    <children>
+        <Button layoutX="21.0" layoutY="86.0" mnemonicParsing="false" onAction="#onClickSearchPlayers" prefHeight="48.0" prefWidth="272.0" text="Search Player">
+            <font><Font name="American Typewriter" size="24.0" /></font>
+        </Button>
+        <Button layoutX="322.0" layoutY="86.0" mnemonicParsing="false" onAction="#onClickSearchClubs" prefHeight="48.0" prefWidth="239.0" text="Search Club">
+            <font><Font name="American Typewriter" size="24.0" /></font>
+        </Button>
+        <Button layoutX="27.0" layoutY="162.0" mnemonicParsing="false" onAction="#onClickAddPlayer" prefHeight="43.0" prefWidth="170.0" text="Add Player">
+            <font><Font name="American Typewriter" size="24.0" /></font>
+        </Button>
+        <Button layoutX="497.0" layoutY="338.0" mnemonicParsing="false" onAction="#onClickExit" styleClass="exit" text="Exit">
+            <font><Font name="American Typewriter" size="24.0" /></font>
+        </Button>
+        <Button layoutX="416.0" layoutY="162.0" mnemonicParsing="false" onAction="#onClickBuyPlayer" prefHeight="48.0" prefWidth="170.0" text="Buy Player">
+            <font><Font name="American Typewriter" size="24.0" /></font>
+        </Button>
+        <Button layoutX="225.0" layoutY="162.0" mnemonicParsing="false" onAction="#onClickMyPlayers" prefHeight="48.0" prefWidth="170.0" text="Sell Player">
+            <font><Font name="American Typewriter" size="24.0" /></font>
+        </Button>
+        <Button layoutX="365.0" layoutY="338.0" mnemonicParsing="false" onAction="#onClickLogOut" prefHeight="48.0" prefWidth="132.0" text="Logout">
+            <font><Font name="American Typewriter" size="24.0" /></font>
+        </Button>
+        <Label layoutX="63.0" layoutY="22.0" text="Player Management System">
+            <font><Font name="American Typewriter Semibold" size="36.0" /></font>
+        </Label>
+      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="21.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" />
+    </children>
+    <style>
+        .button {
+        -fx-background-color: #8179dc;
+        -fx-text-fill: white;
+        -fx-border-radius: 32px;
+        -fx-padding: 10px 20px;
+        -fx-effect: innershadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 2);
+        }
+        .button:hover {
+        -fx-background-color: #6a60c4;
+        -fx-text-fill: white;
+        -fx-border-radius: 32px;
+        -fx-padding: 10px 20px;
+        -fx-effect: innershadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
+        -fx-scale-x: 1.1;
+        -fx-scale-y: 1.1;
+        }-fx-background-color: #f4f0e0;</style>
 </AnchorPane>

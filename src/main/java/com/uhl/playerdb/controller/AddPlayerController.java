@@ -5,6 +5,7 @@ import com.uhl.playerdb.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -42,6 +43,19 @@ public class AddPlayerController extends Controller {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showInfo(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButtonType);
+        Button okButton = (Button) alert.getDialogPane().lookupButton(okButtonType);
+        okButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 12;");
+
+        alert.getDialogPane().setStyle("-fx-background-color: #e0f7e9;");
         alert.showAndWait();
     }
 
@@ -98,6 +112,7 @@ public class AddPlayerController extends Controller {
             player.setWeeklySalary(Integer.parseInt(weeklySalary.getText().trim()));
             addPlayerDTO.setP(player);
             addPlayerDTO.setFrom(clubName);
+            addPlayerDTO.setClubs(clubs);
             try {
                 socketWrapper.write(addPlayerDTO);
             } catch (IOException | ClassNotFoundException e) {
@@ -111,5 +126,15 @@ public class AddPlayerController extends Controller {
         System.out.println("clubs received :"+ clubs.size()+" "+clubs.get(0));
         ObservableList<String> observableClubs = FXCollections.observableArrayList(clubs);
         clubComboBox.setItems(observableClubs);
+    }
+
+    public void onTextFieldFocus(Event event) {
+        TextField textField = (TextField) event.getSource();
+        textField.setStyle("-fx-background-color: #f4f0e0; -fx-border-radius: 16px; -fx-border-color: #000000; -fx-border-width: 2px;");
+    }
+
+    public void onTextFieldExit(Event event) {
+        TextField textField = (TextField) event.getSource();
+        textField.setStyle("-fx-background-color: #f4f0e0; -fx-border-radius: 16px; -fx-border-color: gray;");
     }
 }

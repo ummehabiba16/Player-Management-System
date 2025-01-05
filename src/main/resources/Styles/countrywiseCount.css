@@ -1,21 +1,43 @@
 .table-view {
-    -fx-background-color: white;
+    -fx-background-color: #f4f0e0;
     -fx-border-color: #ccc;
     -fx-border-radius: 5;
+    -fx-cell-size: 45px;
 }
 
 .table-column {
     -fx-alignment: CENTER_LEFT;
 }
 
-.table-view .column-header-background {
-    -fx-background-color: #3498db;
+.table-view .column-header {
+    -fx-background-color: #ad4343;
+}
+
+.table-view .column-header, .table-view .column-header .label {
+    -fx-font-family: "American Typewriter";
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
 }
 
 .table-view .table-row-cell {
     -fx-background-color: #f9f9f9;
+    -fx-font-family: "American Typewriter";
+    -fx-font-size: 12px;
+    -fx-text-fill: black;
 }
 
 .table-view .table-row-cell:odd {
-    -fx-background-color: #e6f7ff;
+    -fx-background-color: rgba(173, 67, 67, 0.1);
 }
+
+.table-view .table-row-cell:even {
+    -fx-background-color: #f4f0e0;
+}
+
+/* Adding spacing between rows */
+.table-view .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #ccc transparent;
+    -fx-border-width: 0 0 2px 0;
+}
+

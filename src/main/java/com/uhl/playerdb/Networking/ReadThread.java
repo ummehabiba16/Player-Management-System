@@ -63,8 +63,7 @@ public class ReadThread implements Runnable {
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
-                                main.showAlert("Successful", "Player added successfully");
-
+                                main.showInfo("Successful", "Player added successfully");
                             });
                         }
                     }

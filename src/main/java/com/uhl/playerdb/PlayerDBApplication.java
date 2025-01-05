@@ -10,6 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -33,7 +36,7 @@ public class PlayerDBApplication extends Application {
         connectToServer();
 //        switchScene("welcome");
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("welcome.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         //MenuContext mc = new MenuContext();
         WelcomeController controller = fxmlLoader.getController();
         controller.setMain(this);
@@ -61,7 +64,7 @@ public class PlayerDBApplication extends Application {
     public void switchScene(String name) throws IOException {
         System.out.println("WelcomeController, switching scene to" + name);
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource(name + ".fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         controller = fxmlLoader.getController();
         this.controller = controller;
         controller.setStage(stage);
@@ -88,7 +91,7 @@ public class PlayerDBApplication extends Application {
         Platform.runLater(() -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("mainMenu.fxml"));
-                Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+                Scene scene = new Scene(fxmlLoader.load(), 600, 400);
                 MainMenuController mainMenuController = fxmlLoader.getController();
                 controller = mainMenuController;
                 controller.setClubName(username);
@@ -129,7 +132,7 @@ public class PlayerDBApplication extends Application {
         System.out.println("switching scene to buy menu");
         //switch scene to buyPlayer
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("buyPlayer.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         BuyPlayerController controller = fxmlLoader.getController();
         this.controller = controller;
         controller.updatePlayerList(playerList);
@@ -146,7 +149,7 @@ public class PlayerDBApplication extends Application {
         System.out.println("switching scene to search players");
         //switch scene to buyPlayer
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("searchPlayer.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         SearchPlayerController controller = fxmlLoader.getController();
         this.controller = controller;
         controller.setPlayerListService(playerList);
@@ -164,7 +167,7 @@ public class PlayerDBApplication extends Application {
         System.out.println("switching scene to search clubs");
         //switch scene to buyPlayer
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("searchClub.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         SearchClubController controller = fxmlLoader.getController();
         this.controller = controller;
         controller.setClubService(playerList);
@@ -182,7 +185,7 @@ public class PlayerDBApplication extends Application {
         System.out.println("switching scene to my players");
         //switch scene to buyPlayer
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("MyPlayer.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         MyPlayerController controller = fxmlLoader.getController();
         this.controller = controller;
         //controller.setClubService(playerList);
@@ -203,6 +206,19 @@ public class PlayerDBApplication extends Application {
         alert.showAndWait();
     }
 
+    public void showInfo(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButtonType);
+        Button okButton = (Button) alert.getDialogPane().lookupButton(okButtonType);
+        okButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 12;");
+        alert.getDialogPane().setStyle("-fx-background-color: #e0f7e9;");
+        alert.initOwner(null);
+        alert.showAndWait();
+    }
+
     public void showAddPlayer(String clubName, List<String> clubs) throws IOException {
         //PlayerDBApplication.class.getResource("add.fxml")
 //        FXMLLoader fxmlLoader = new FXMLLoader();
@@ -219,7 +235,7 @@ public class PlayerDBApplication extends Application {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("addPlayer.fxml"));
                 System.out.println("Check 0");
-                Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+                Scene scene = new Scene(fxmlLoader.load(), 600, 400);
                 System.out.println("Check 1");
                 AddPlayerController controller = fxmlLoader.getController();
                 this.controller = controller;
@@ -246,7 +262,7 @@ public class PlayerDBApplication extends Application {
 
     public void showWelcomePage() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PlayerDBApplication.class.getResource("welcome.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         WelcomeController controller = fxmlLoader.getController();
         controller.setMain(this);
         controller.setStage(stage);

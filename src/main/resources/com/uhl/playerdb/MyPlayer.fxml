@@ -6,13 +6,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uhl.playerdb.controller.MyPlayerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f4f0e0;" stylesheets="@../../../Styles/myPlayer.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uhl.playerdb.controller.MyPlayerController">
    <children>
-      <ListView fx:id="playerListView" layoutX="132.0" layoutY="86.0" prefHeight="314.0" prefWidth="404.0" />
-      <Label layoutX="235.0" layoutY="32.0" prefHeight="42.0" prefWidth="143.0" text="My Players">
+      <ListView fx:id="playerListView" layoutX="132.0" layoutY="86.0" prefHeight="314.0" prefWidth="404.0" style="-fx-background-color: #f4f0e0;" />
+      <Label layoutX="194.0" layoutY="19.0" prefHeight="43.0" prefWidth="212.0" text="Sell Players">
          <font>
-            <Font size="24.0" />
+            <Font name="American Typewriter" size="36.0" />
          </font>
       </Label>
       <Label fx:id="clubNameLabel" layoutX="40.0" layoutY="53.0" />

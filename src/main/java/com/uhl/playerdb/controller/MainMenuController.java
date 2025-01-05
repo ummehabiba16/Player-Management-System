@@ -2,10 +2,21 @@ package com.uhl.playerdb.controller;
 
 import com.uhl.playerdb.DTO.*;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
 public class MainMenuController extends Controller {
+    public ImageView imageView;
+
+    public void initialize() {
+        // Load the image from the classpath
+        Image image = new Image(getClass().getResourceAsStream("/com/uhl/playerdb/images/ballImage.jpg"));
+        imageView.setImage(image);
+
+    }
+
 
     public void onClickSearchPlayers(ActionEvent actionEvent) throws IOException {
         GetAllPlayersDTO getAllPlayersDTO = new GetAllPlayersDTO();
